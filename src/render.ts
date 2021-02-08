@@ -7,8 +7,8 @@ const renderRecord = (element: TVDElementRecord) => {
 
   Object.entries(props).forEach(([key, value]) => rEl.setAttribute(key, value));
   if (!children) return rEl;
-  if (isArray(children ? children : [children]))
-    (children as TVDElement[]).forEach(ch => rEl.appendChild(render(ch)));
+  const arrToRender = isArray(children) ? children : [children];
+  (arrToRender as TVDElement[]).forEach(ch => rEl.appendChild(render(ch)));
 
   return rEl;
 };
