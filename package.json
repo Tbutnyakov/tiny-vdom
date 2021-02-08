@@ -1,0 +1,24 @@
+{
+  "name": "tiny-vdom",
+  "version": "1.0.0",
+  "description": "Just a simple implementation of virtual dom",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel  ./example/index.html watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tbutnyakov/tiny-vdom.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tbutnyakov/tiny-vdom/issues"
+  },
+  "homepage": "https://github.com/Tbutnyakov/tiny-vdom#readme",
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "typescript": "^4.1.3"
+  }
+}
