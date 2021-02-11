@@ -1,4 +1,7 @@
 export const mount = (
   newElement: HTMLElement | Text,
   node: HTMLElement | null
-) => (node ? node.replaceWith(newElement) : node);
+) => {
+  (node as HTMLElement).replaceWith(newElement);
+  return newElement;
+};

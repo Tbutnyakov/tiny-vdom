@@ -1,24 +1,23 @@
 import { createElement } from '../src/createElement';
 import { render } from '../src/render';
 import { mount } from '../src/mount';
+import { diff } from '../src/diff';
 
-const roots = [
-  createElement('div', { class: 'test' }, [
-    'hello',
-    'world',
-    createElement('img', {
-      alt: 'cuteCat',
-      src:
-        'https://c.files.bbci.co.uk/12A9B/production/_111434467_gettyimages-1143489763.jpg',
-    }),
-  ]),
-  createElement('div', { class: 'test' }, [
-    createElement('p', {}, 'one'),
-    createElement('p', {}, 'two'),
-    createElement('p', {}, 'three'),
-  ]),
-];
+const makeCounter = newCount =>
+  createElement('div', { children: ['the count is:', String(newCount)] });
 
-const wrapper = createElement('div', { class: 'test', id: 'testId' }, roots);
+let count = 0;
 
-const app = mount(render(wrapper), document.getElementById('root'));
+let oldApp = makeCounter(count);
+let rootEl = mount(render(oldApp), document.getElementById('root'));
+
+setInterval(() => {
+  count++;
+
+  const newApp = makeCounter(count);
+  const patch = diff(oldApp, newApp);
+
+  rootEl = patch(rootEl);
+
+  oldApp = newApp;
+}, 1000);
