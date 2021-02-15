@@ -2,12 +2,10 @@ import { TVDElement, TVDElementRecord } from './types';
 import { isString, isArray } from './utils';
 
 const renderRecord = (element: TVDElementRecord) => {
-  const rEl = document.createElement(element.tag);
-  const { children, ...restProps } = element.props;
+  const { tag, children = [], props = {} } = element;
+  const rEl = document.createElement(tag);
 
-  Object.entries(restProps).forEach(([key, value]) =>
-    rEl.setAttribute(key, value)
-  );
+  Object.entries(props).forEach(([key, value]) => rEl.setAttribute(key, value));
   if (!children) return rEl;
   const arrToRender = isArray(children) ? children : [children];
   (arrToRender as TVDElement[]).forEach(ch => rEl.appendChild(render(ch)));

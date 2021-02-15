@@ -3,6 +3,8 @@ import { TVDElementRecord } from './types';
 export const isString = (entity: unknown): entity is string =>
   Object.is(typeof entity, 'string');
 export const isArray = (entity: unknown) => Array.isArray(entity);
+export const isFunction = (entity: unknown): entity is Function =>
+  Object.is(typeof entity, 'function');
 export const isSameString = (first: string, second: string) =>
   Object.is(first, second);
 export const isSameTags = (first: TVDElementRecord, second: TVDElementRecord) =>

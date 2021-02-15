@@ -11,6 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/Tbutnyakov/tiny-vdom.git"
   },
+  "alias": {
+    "tiny-vdom": "./src/index.ts"
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -18,6 +21,9 @@
   },
   "homepage": "https://github.com/Tbutnyakov/tiny-vdom#readme",
   "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/plugin-syntax-jsx": "^7.12.13",
+    "@babel/plugin-transform-react-jsx": "^7.12.16",
     "prettier": "^2.2.1",
     "typescript": "^4.1.3"
   }

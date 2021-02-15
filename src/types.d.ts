@@ -5,13 +5,11 @@ export type TVDElement = TVDElementRecord | string | undefined;
 export interface TVDPropRecord {
   [key: string]: any;
 }
-export interface TVDProps extends TVDPropRecord {
-  children: TVDElement[];
-}
 
 export type TVDElementRecord = {
   tag: TVDTag;
-  props: TVDProps;
+  props: TVDPropRecord;
+  children: TVDElement[];
 };
 
 export type TRDElement = HTMLElement;

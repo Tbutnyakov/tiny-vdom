@@ -82,13 +82,13 @@ export const diff = (oldVTree: TVDElement, newVTree: TVDElement) => {
     return replaceElement(newVTree);
 
   const {
+    props: oldProps,
     children: oldChildren,
-    ...oldProps
-  } = (oldVTree as TVDElementRecord).props;
+  } = oldVTree as TVDElementRecord;
   const {
+    props: newProps,
     children: newChildren,
-    ...newProps
-  } = (newVTree as TVDElementRecord).props;
+  } = newVTree as TVDElementRecord;
 
   const patchProps = diffProps(oldProps, newProps);
   const patchChildren = diffChildren(oldChildren, newChildren);
