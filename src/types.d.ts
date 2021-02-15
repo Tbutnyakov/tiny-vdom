@@ -1,12 +1,12 @@
 export type TVDTag = string;
 
 export type TVDElement = TVDElementRecord | string | undefined;
-export type TVDChildren = TVDElement | TVDElement[];
+
 export interface TVDPropRecord {
   [key: string]: any;
 }
 export interface TVDProps extends TVDPropRecord {
-  children?: TVDChildren;
+  children: TVDElement[];
 }
 
 export type TVDElementRecord = {

@@ -1,7 +1,6 @@
 import {
   TVDElement,
   TRDElement,
-  TVDChildren,
   TVDElementRecord,
   PatchAttributeCallback,
   TVDPropRecord,
@@ -23,8 +22,30 @@ const diffProps = (oldProps: TVDPropRecord, newProps: TVDPropRecord) => {
   };
 };
 
-const diffChildren = (oldChildren: TVDChildren, newChildren: TVDChildren) => {
-  return (rNode: TRDElement) => rNode;
+const appendElement = (vNode: TVDElement) => (rNode: TRDElement) => {
+  rNode.appendChild(render(vNode));
+  return rNode;
+};
+
+const diffChildren = (oldChildren: TVDElement[], newChildren: TVDElement[]) => {
+  const childPatches = [] as any[];
+  const additionalPatches = [] as any[];
+  oldChildren.forEach((oldChild, i) =>
+    childPatches.push(diff(oldChild, newChildren[i]))
+  );
+
+  newChildren
+    .slice(oldChildren.length)
+    .forEach(newChild => additionalPatches.push(appendElement(newChild)));
+
+  return (parentNode: TRDElement) => {
+    parentNode.childNodes.forEach((child, i) => {
+      childPatches[i](child);
+    });
+
+    additionalPatches.forEach(patch => patch(parentNode));
+    return parentNode;
+  };
 };
 
 const removeElement = (rNode: TRDElement) => {
@@ -53,7 +74,8 @@ export const doNothing = (rNode: TRDElement) => rNode;
 export const diff = (oldVTree: TVDElement, newVTree: TVDElement) => {
   if (Object.is(newVTree, undefined)) return removeElement;
   if (isString(oldVTree) || isString(newVTree)) {
-    if (!isSameString(oldVTree, newVTree)) return replaceElement(newVTree);
+    if (!isSameString(oldVTree as string, newVTree as string))
+      return replaceElement(newVTree);
     return doNothing;
   }
   if (!isSameTags(oldVTree as TVDElementRecord, newVTree as TVDElementRecord))
