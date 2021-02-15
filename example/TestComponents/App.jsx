@@ -1,4 +1,4 @@
-import vdom from 'tiny-vdom';
+import { makeElement } from 'tiny-vdom';
 
 import { Counter } from './Counter';
 

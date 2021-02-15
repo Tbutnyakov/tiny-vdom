@@ -1,4 +1,5 @@
-import vdom from 'tiny-vdom';
+import { makeElement } from 'tiny-vdom';
+import { Button } from './Button';
 
 export const Counter = ({ count = 0 }) => {
   const onClick = () => {
