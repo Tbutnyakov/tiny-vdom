@@ -6,7 +6,6 @@ export const makeElement = (
   props: TVDPropRecord = {},
   ...children: TVDElement[]
 ): TVDElement => {
-  console.log(tag);
   if (isFunction(tag)) {
     return tag(props, children);
   }

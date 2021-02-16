@@ -2,13 +2,19 @@ import { TVDElement, TVDElementRecord } from './types';
 import { isString, isArray } from './utils';
 
 const renderRecord = (element: TVDElementRecord) => {
-  const { tag, children = [], props = {} } = element;
+  const { tag, children = [], props } = element;
+
   const rEl = document.createElement(tag);
 
-  Object.entries(props).forEach(([key, value]) => rEl.setAttribute(key, value));
-  if (!children) return rEl;
+  Object.entries(props || {}).forEach(([key, value]) =>
+    rEl.setAttribute(key, value)
+  );
+
   const arrToRender = isArray(children) ? children : [children];
-  (arrToRender as TVDElement[]).forEach(ch => rEl.appendChild(render(ch)));
+
+  (arrToRender as TVDElement[])
+    .filter(Boolean)
+    .forEach(ch => rEl.appendChild(render(ch)));
 
   return rEl;
 };

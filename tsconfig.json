@@ -3,6 +3,8 @@
     "outDir": "./dist/",
     "baseUrl": "./",
     "strict": true,
+    "jsx": "react",
+    "jsxFactory": "makeElement",
     "target": "es5",
     "allowJs": true,
     "lib": ["dom", "es2019"],
